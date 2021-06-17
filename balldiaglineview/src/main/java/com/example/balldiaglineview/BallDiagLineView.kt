@@ -206,4 +206,13 @@ class BallDiagLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : BallDiagLineView {
+            val view : BallDiagLineView = BallDiagLineView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
