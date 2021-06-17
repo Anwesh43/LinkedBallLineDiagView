@@ -181,4 +181,27 @@ class BallDiagLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BallDiagLineView) {
+
+        private val animator : Animator = Animator(view)
+        private val bdl : BallDiagLine = BallDiagLine(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            bdl.draw(canvas, paint)
+            animator.animate {
+                bdl.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            bdl.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
