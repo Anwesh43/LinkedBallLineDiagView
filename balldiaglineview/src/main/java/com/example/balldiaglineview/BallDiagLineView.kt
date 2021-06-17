@@ -21,7 +21,7 @@ val colors : Array<Int> = arrayOf(
 val parts : Int = 4
 val scGap : Float = 0.02f / parts
 val strokeFactor : Float = 90f
-val rFactor : Float = 5.9f
+val rFactor : Float = 12.9f
 val delay : Long = 20
 val backColor : Int = Color.parseColor("#BDBDBD")
 
@@ -41,8 +41,13 @@ fun Canvas.drawBallDiagLine(scale : Float, w : Float, h : Float, paint : Paint) 
     val y2 : Float = -(h / 2 - r) * sc2 + (h / 2 - r) * sc4
     save()
     translate(w / 2, h / 2)
-    drawCircle(x1, y1, r, paint)
-    drawLine(x1, y1, x2, y2, paint)
+    for (j in 0..1) {
+        save()
+        scale(1f, 1f - 2 * j)
+        drawCircle(x1, y1, r, paint)
+        drawLine(x1, y1, x2, y2, paint)
+        restore()
+    }
     restore()
 }
 
